@@ -31,18 +31,23 @@ prompt(employeeType).then(({ employee }) => {
 });
 
 const managerQuestionaire = () =>
-  prompt(managerQuestions).then(answers => {
-    console.log(answers);
+  prompt(managerQuestions).then(ans => {
+    teamMembers.push(
+      new Manager(ans.name, ans.id, ans.email, ans.officeNumber)
+    );
+    console.log(teamMembers);
   });
 
 const engineerQuestionaire = () =>
-  prompt(engineerQuestions).then(answers => {
-    console.log(answers);
+  prompt(engineerQuestions).then(ans => {
+    teamMembers.push(new Engineer(ans.name, ans.id, ans.email, ans.github));
+    console.log(teamMembers);
   });
 
 const internQuestionaire = () =>
-  prompt(internQuestions).then(answers => {
-    console.log(answers);
+  prompt(internQuestions).then(ans => {
+    teamMembers.push(new Engineer(ans.name, ans.id, ans.email, ans.school));
+    console.log(teamMembers);
   });
 
 //if user chose engineer call engineer inq and engineer func to be built
