@@ -7,6 +7,8 @@ const questions = require("./questions");
 
 const employeeType = questions.employeeType;
 const managerQuestions = questions.managerQuestions;
+const engineerQuestions = questions.engineerQuestions;
+const internQuestions = questions.internQuestions;
 
 //make team members array of objects
 const prompt = inquirer.createPromptModule();
@@ -20,13 +22,29 @@ prompt(employeeType).then(({ employee }) => {
   if (employee === "manager") {
     managerQuestionaire();
   }
+  if (employee === "engineer") {
+    engineerQuestionaire();
+  }
+  if (employee === "intern") {
+    internQuestionaire();
+  }
 });
 
-const managerQuestionaire = function() {
+const managerQuestionaire = () =>
   prompt(managerQuestions).then(answers => {
     console.log(answers);
   });
-};
+
+const engineerQuestionaire = () =>
+  prompt(engineerQuestions).then(answers => {
+    console.log(answers);
+  });
+
+const internQuestionaire = () =>
+  prompt(internQuestions).then(answers => {
+    console.log(answers);
+  });
+
 //if user chose engineer call engineer inq and engineer func to be built
 
 // then ({info}) to pplot new Engineer and make html
@@ -36,16 +54,3 @@ const managerQuestionaire = function() {
 //createManager(
 
 //push engineer to team memebers oblect
-
-// inquirer
-//   .prompt([
-//     {
-//       type: "list",
-//       name: "employee",
-//       message: "Select role:",
-//       choices: ["Manager", "Engineer", "Intern"]
-//     }
-//   ])
-//   .then(reply => {
-//     console.log(reply);
-//   });
