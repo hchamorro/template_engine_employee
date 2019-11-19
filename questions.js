@@ -32,6 +32,12 @@ const managerQuestions = [
     type: "input",
     name: "officeNumber",
     message: "Office Number: "
+  },
+  {
+    type: "confirm",
+    name: "addEmployee",
+    message: "Would you like to enter a new employee?",
+    default: false
   }
 ];
 
@@ -59,6 +65,12 @@ const engineerQuestions = [
     type: "input",
     name: "github",
     message: "GitHub User Name: "
+  },
+  {
+    type: "confirm",
+    name: "addEmployee",
+    message: "Would you like to enter a new employee?",
+    default: false
   }
 ];
 
@@ -86,6 +98,12 @@ const internQuestions = [
     type: "input",
     name: "school",
     message: "School Attended: "
+  },
+  {
+    type: "confirm",
+    name: "addEmployee",
+    message: "Would you like to enter a new employee?",
+    default: false
   }
 ];
 
