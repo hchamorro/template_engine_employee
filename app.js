@@ -14,65 +14,71 @@ const internQuestions = questions.internQuestions;
 const prompt = inquirer.createPromptModule();
 const teamMembers = [];
 
-let sam = new Manager("Sam", 1, "sam@email.com", 1);
-teamMembers.push(sam);
+const sara = new Manager("Sara", 1, "sara@email.com", 1);
+const beth = new Engineer("Beth", 2, "beth@email.com", "bhub");
+const tim = new Intern("Timmy", 2, "timothy@email.com", "UIC");
+
+teamMembers.push(sara, beth, tim);
 
 //make a function to create team "team member type question inquq" then run set of questions assoctiated with the info needed for each class
 const init = () => {
   prompt(employeeType).then(({ employee }) => {
     if (employee === "manager") {
-      managerQuestionaire();
+      managerQuestionnaire();
     }
     if (employee === "engineer") {
-      engineerQuestionaire();
+      engineerQuestionnaire();
     }
     if (employee === "intern") {
-      internQuestionaire();
+      internQuestionnaire();
     }
   });
 };
 
-const managerQuestionaire = () =>
+const managerQuestionnaire = () =>
   prompt(managerQuestions).then(ans => {
-    if (ans.addEmployee === true) {
-      init();
-    } else {
-      teamMembers.push(
-        new Manager(ans.name, ans.id, ans.email, ans.officeNumber)
-      );
-      createSection();
-    }
+    teamMembers.push(
+      new Manager(ans.name, ans.id, ans.email, ans.officeNumber)
+    );
+    console.log("User Sucessfully Added");
+    addNewEmpoyeeOrCreateSection(ans);
   });
 
-const engineerQuestionaire = () =>
+const engineerQuestionnaire = () =>
   prompt(engineerQuestions).then(ans => {
-    if (ans.addEmployee === true) {
-      init();
-    } else {
-      teamMembers.push(new Engineer(ans.name, ans.id, ans.email, ans.github));
-      createSection();
-    }
+    teamMembers.push(new Engineer(ans.name, ans.id, ans.email, ans.github));
+    console.log("User Sucessfully Added");
+    addNewEmpoyeeOrCreateSection(ans);
   });
 
-const internQuestionaire = () =>
+const internQuestionnaire = () =>
   prompt(internQuestions).then(ans => {
-    if (ans.addEmployee === true) {
-      init();
-    } else {
-      teamMembers.push(new Intern(ans.name, ans.id, ans.email, ans.school));
-      createSection();
-    }
+    teamMembers.push(new Intern(ans.name, ans.id, ans.email, ans.school));
+    console.log("User Sucessfully Added");
+    addNewEmpoyeeOrCreateSection(ans);
   });
+
+addNewEmpoyeeOrCreateSection = data => {
+  if (data.addEmployee === true) {
+    init();
+  } else {
+    createSection();
+  }
+};
 
 createSection = () => {
   teamMembers.forEach(teamMem => {
-    console.log(teamMem);
+    //console.log(teamMem);
     let uniqueId = `Office Number: ${teamMem.officeNumber}`;
-    if (teamMem.officeNumber === undefined) {
+    if (teamMem.officeNumber === undefined && teamMem.school === undefined) {
       uniqueId = `GitHub: ${teamMem.github}`;
-    }
-    if (teamMem.github === undefined) {
+    } else if (
+      teamMem.officeNumber === undefined &&
+      teamMem.github === undefined
+    ) {
       uniqueId = `School: ${teamMem.school}`;
+    } else if (teamMem.school === undefined) {
+      uniqueId = `Office Number: ${teamMem.officeNumber}`;
     }
 
     const section = `<section class="bxsh-0-5-15-0 m-1  w-20">
