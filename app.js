@@ -10,13 +10,37 @@ const managerQuestions = questions.managerQuestions;
 const engineerQuestions = questions.engineerQuestions;
 const internQuestions = questions.internQuestions;
 
+let htmlHeader = `
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Quicksand&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Employee Roster</title>
+  </head>
+  <body class="ff-quicksand">
+    <header class="d-f jc-c">
+      <h1>Employee Roster</h1>
+    </header>
+    <div class="d-f jc-c flw-w m-a maw-80">`;
+const htmlFooter = `
+</div>
+</body>
+</html>`;
+
 //make team members array of objects
 const prompt = inquirer.createPromptModule();
 const teamMembers = [];
 
-const sara = new Manager("Sara", 1, "sara@email.com", 1);
+const sara = new Manager("Sara", 1, "sara@email.com", "6-218");
 const beth = new Engineer("Beth", 2, "beth@email.com", "bhub");
-const tim = new Intern("Timmy", 2, "timothy@email.com", "UIC");
+const tim = new Intern("Timmy", 3, "timothy@email.com", "UIC");
 
 teamMembers.push(sara, beth, tim);
 
@@ -93,14 +117,26 @@ createSection = () => {
             ID: ${teamMem.id}
           </div>
           <div class="p-.5">
-            Email: ${teamMem.id}
+            Email: ${teamMem.email}
           </div>
           <div class="p-.5">
             ${uniqueId}
           </div>
         </div>
       </section>`;
-    console.log(section);
+
+    htmlHeader = htmlHeader + section;
+  });
+  createHtml();
+};
+
+createHtml = () => {
+  finalHtml = htmlHeader + htmlFooter;
+
+  fs.writeFile("index.html", finalHtml, function(err) {
+    if (err) {
+      return console.log(err);
+    }
   });
 };
 
@@ -115,3 +151,16 @@ init();
 //createManager(
 
 //push engineer to team memebers oblect
+
+// ask about test being individual functions or whole app... how to export
+// returns on addNewEmployeeOrCreateSection()
+// push section to array then make html with populated sections?
+
+// const htmHeader = `<html><head>....</head><body><div>`;
+// employees.forEach (employe => {
+// const hannarandom = `<div>employee info</div>`;
+// htmHeader = htmHeader + hannarandom;
+// })
+// const htmlFooter = `</div></body></html>`;
+// finalHtml = finalHtml + htmlFooter;
+// console.log(finalHtml);
