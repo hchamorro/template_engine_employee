@@ -96,14 +96,14 @@ createSection = () => {
     //console.log(teamMem);
     let uniqueId = `Office Number: ${teamMem.officeNumber}`;
     if (teamMem.officeNumber === undefined && teamMem.school === undefined) {
-      uniqueId = `GitHub: ${teamMem.github}`;
+      uniqueId = `GitHub:  <div class="fw-n">  ${teamMem.github}</div> `;
     } else if (
       teamMem.officeNumber === undefined &&
       teamMem.github === undefined
     ) {
-      uniqueId = `School: ${teamMem.school}`;
+      uniqueId = `School: <div class="fw-n"> ${teamMem.school}</div>`;
     } else if (teamMem.school === undefined) {
-      uniqueId = `Office Number: ${teamMem.officeNumber}`;
+      uniqueId = `Office Number:  <div class="fw-n"> ${teamMem.officeNumber} </div> `;
     }
 
     const section = `<section class="bxsh-0-5-15-0 m-1  w-20">
@@ -114,14 +114,27 @@ createSection = () => {
           </h3>
         </div>
         <div class="m-1 p-.5">
-          <div class="p-.5">
-            ID: ${teamMem.id}
+          <div class="d-f fw-b p-.5">
+            <div>
+              ID:&nbsp;  
+            </div >  
+            <div class="fw-n">
+            ${teamMem.id}
+            </div>
           </div>
-          <div class="p-.5">
-            Email: ${teamMem.email}
+          <div class="fw-b p-.5">
+            <div>
+              Email: 
+            </div>  
+            <div class="fw-n">
+            ${teamMem.email}
+            </div>
           </div>
-          <div class="p-.5">
-            ${uniqueId}
+          <div class="fw-b p-.5">
+            <div>
+              ${uniqueId}
+            </div>
+              
           </div>
         </div>
       </section>`;

@@ -165,6 +165,12 @@
 .flw-w {
   flex-wrap: wrap;
 }
+.fw-b {
+  font-weight: bold;
+}
+.fw-n {
+  font-weight: normal;
+}
 .fz-24 {
   font-size: 24px;
 }
