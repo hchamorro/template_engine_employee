@@ -10,6 +10,11 @@ const managerQuestions = questions.managerQuestions;
 const engineerQuestions = questions.engineerQuestions;
 const internQuestions = questions.internQuestions;
 
+const htmlFooter = `
+</div>
+</body>
+</html>`;
+
 let htmlHeader = `
 <!DOCTYPE html>
 <html lang="en">
@@ -29,10 +34,6 @@ let htmlHeader = `
       <h1>Employee Roster</h1>
     </header>
     <div class="d-f jc-c flw-w m-a maw-80">`;
-const htmlFooter = `
-</div>
-</body>
-</html>`;
 
 //make team members array of objects
 const prompt = inquirer.createPromptModule();
@@ -151,16 +152,3 @@ init();
 //createManager(
 
 //push engineer to team memebers oblect
-
-// ask about test being individual functions or whole app... how to export
-// returns on addNewEmployeeOrCreateSection()
-// push section to array then make html with populated sections?
-
-// const htmHeader = `<html><head>....</head><body><div>`;
-// employees.forEach (employe => {
-// const hannarandom = `<div>employee info</div>`;
-// htmHeader = htmHeader + hannarandom;
-// })
-// const htmlFooter = `</div></body></html>`;
-// finalHtml = finalHtml + htmlFooter;
-// console.log(finalHtml);
