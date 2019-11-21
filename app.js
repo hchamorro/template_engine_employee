@@ -10,6 +10,8 @@ const managerQuestions = questions.managerQuestions;
 const engineerQuestions = questions.engineerQuestions;
 const internQuestions = questions.internQuestions;
 
+const prompt = inquirer.createPromptModule();
+
 const htmlFooter = `
 </div>
 </body>
@@ -36,14 +38,17 @@ let htmlHeader = `
     <div class="d-f jc-c flw-w m-a maw-80">`;
 
 //make team members array of objects
-const prompt = inquirer.createPromptModule();
-const teamMembers = [];
 
-const sara = new Manager("Sara", 1, "sara@email.com", "6-218");
-const beth = new Engineer("Beth", 2, "beth@email.com", "bhub");
-const tim = new Intern("Timmy", 3, "timothy@email.com", "UIC");
+let teamMembers = [];
+const managerArr = [];
+const engineerArr = [];
+const internArr = [];
 
-teamMembers.push(sara, beth, tim);
+managerArr.push(new Manager("Sara", 1, "sara@email.com", "6-218"));
+engineerArr.push(new Engineer("Beth", 2, "beth@email.com", "bhub"));
+internArr.push(new Intern("Timmy", 3, "timothy@email.com", "UIC"));
+
+//teamMembers.push(sara, beth, tim);
 
 //make a function to create team "team member type question inquq" then run set of questions assoctiated with the info needed for each class
 const init = () => {
@@ -62,23 +67,21 @@ const init = () => {
 
 const managerQuestionnaire = () =>
   prompt(managerQuestions).then(ans => {
-    teamMembers.push(
-      new Manager(ans.name, ans.id, ans.email, ans.officeNumber)
-    );
+    managerArr.push(new Manager(ans.name, ans.id, ans.email, ans.officeNumber));
     console.log("User Sucessfully Added");
     addNewEmpoyeeOrCreateSection(ans);
   });
 
 const engineerQuestionnaire = () =>
   prompt(engineerQuestions).then(ans => {
-    teamMembers.push(new Engineer(ans.name, ans.id, ans.email, ans.github));
+    engineerArr.push(new Engineer(ans.name, ans.id, ans.email, ans.github));
     console.log("User Sucessfully Added");
     addNewEmpoyeeOrCreateSection(ans);
   });
 
 const internQuestionnaire = () =>
   prompt(internQuestions).then(ans => {
-    teamMembers.push(new Intern(ans.name, ans.id, ans.email, ans.school));
+    internArr.push(new Intern(ans.name, ans.id, ans.email, ans.school));
     console.log("User Sucessfully Added");
     addNewEmpoyeeOrCreateSection(ans);
   });
@@ -87,7 +90,8 @@ addNewEmpoyeeOrCreateSection = data => {
   if (data.addEmployee === true) {
     init();
   } else {
-    createSection();
+    teamMembers = managerArr.concat(engineerArr, internArr);
+    createSection(teamMembers);
   }
 };
 
